@@ -1,2 +1,27 @@
-# WindDeskTool
-Desktop tools like the wind
+# 风桌工具
+
+简体中文 | [English](README_en.md)
+
+## 功能
+
++ 主题设置（开发中）
++ 插件管理（开发中）
++ 本地缓存（开发中）
++ ...
+
+## 插件
+
++ 按键可视化助手（开发中）
++ 翻译助手（概念）
++ 智能输入框（概念）
++ 状态助手（概念）
++ ...
+
+## 环境
+
++ C++
++ Qt - 6.9.2
+
+## License
+
+[Apache-2.0](LICENSE)
