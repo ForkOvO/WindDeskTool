@@ -12,11 +12,16 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)   # 查找库
 
 set(EXEC_PATH ${CMAKE_SOURCE_DIR}/bin) # 设置可执行文件输出目录
 set(LIB_PATH ${CMAKE_SOURCE_DIR}/bin)   # 设置库文件输出目录
+set(PLUGIN_PATH ${CMAKE_SOURCE_DIR}/bin/plugins) # 设置插件输出目录
 
 set(EXECUTABLE_OUTPUT_PATH ${EXEC_PATH}) # 可执行文件输出目录
 
+include_directories(public)
+
 # 添加子目录
+add_subdirectory(public)
 add_subdirectory(main)
+add_subdirectory(plugin)
 
 qt_add_executable(
     ${PROJECT_NAME} # 项目名称
@@ -28,6 +33,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Core
     Qt6::Widgets
     # 自定义
+    public
     main
 )   # 链接库
 
