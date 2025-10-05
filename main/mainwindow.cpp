@@ -1,7 +1,6 @@
 #include "mainwindow.h"
-#include "interface.h"
+#include "centralwidget.h"
 
-#include <QPluginLoader>
 #include <QMouseEvent>
 #include <QPushButton>
 #include <QPainter>
@@ -10,24 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setWindowTitle("WindDeskTool");
-    resize(1000, 800);
-
-    // 加载插件
-    QPluginLoader loader("plugins/libtest.dll");
-    QObject *plugin = loader.instance();
-    if (plugin)
-    {
-        PluginInterface *pluginInterface = qobject_cast<PluginInterface *>(plugin);
-        if (pluginInterface)
-        {
-            qDebug() << "Plugin loaded:" << pluginInterface->name();
-            pluginInterface->setParent(this); // 将插件的父对象设置为MainWindow，确保其生命周期与MainWindow一致
-        }
-    }
-    else
-    {
-        qDebug() << "Failed to load plugin:" << loader.errorString();
-    }
 
     uiInit();   // 初始化界面
 }
@@ -80,8 +61,13 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
 void MainWindow::uiInit()
 {
-    // 设置无边框窗口
+    // 设置窗口
+    resize(1000, 800);
     setWindowFlags(Qt::FramelessWindowHint);
+
+    // 中心窗口
+    m_centralWidget = new CentralWidget(this);
+    setCentralWidget(m_centralWidget);
 
     // 关闭按钮
     m_closeBtn = new QPushButton(this);

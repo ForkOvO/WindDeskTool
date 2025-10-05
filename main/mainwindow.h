@@ -7,6 +7,8 @@
 
 class QPushButton;
 
+class CentralWidget;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -31,5 +33,7 @@ private:
     QPoint m_dragPosition;  // 拖动位置
 
     QPushButton* m_closeBtn = nullptr;  // 关闭按钮
+
+    CentralWidget* m_centralWidget = nullptr;  // 中心窗口
 };
 #endif // MAINWINDOW_H
