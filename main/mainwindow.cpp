@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "centralwidget.h"
+#include "publicinfomanager.h"
 
 #include <QMouseEvent>
 #include <QPushButton>
@@ -8,7 +9,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setWindowTitle("WindDeskTool");
+    setWindowTitle(PublicInfoManager::instance()->name());
 
     uiInit();   // 初始化界面
 }
