@@ -13,8 +13,11 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)   # 查找库
 set(EXEC_PATH ${CMAKE_SOURCE_DIR}/bin) # 设置可执行文件输出目录
 set(LIB_PATH ${CMAKE_SOURCE_DIR}/bin)   # 设置库文件输出目录
 set(PLUGIN_PATH ${CMAKE_SOURCE_DIR}/bin/plugins) # 设置插件输出目录
+set(RES_PATH ${CMAKE_SOURCE_DIR}/bin/res) # 设置资源文件目录
 
 set(EXECUTABLE_OUTPUT_PATH ${EXEC_PATH}) # 可执行文件输出目录
+
+execute_process( COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/res ${RES_PATH}) # 复制资源文件
 
 include_directories(public)
 
