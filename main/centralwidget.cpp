@@ -1,25 +1,30 @@
 #include "centralwidget.h"
-#include "interface.h"
+#include "pluginmanager.h"
 
-#include <QPluginLoader>
+#include <QHBoxLayout>
+#include <QListWidget>
+#include <QStackedWidget>
 
 CentralWidget::CentralWidget(QWidget *parent)
 {
-    // 加载插件
-    QPluginLoader loader("plugins/libtest.dll");
-    QObject *plugin = loader.instance();
-    if (plugin)
+    // 初始化部件
+    m_pluginManager = new PluginManager(this);
+    m_pluginListWidget = new QListWidget();
+    m_pluginStackedWidget = new QStackedWidget();
+
+    connect(m_pluginListWidget, &QListWidget::currentRowChanged, m_pluginStackedWidget, &QStackedWidget::setCurrentIndex);
+
+    // 初始化布局
+    QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->addWidget(m_pluginListWidget);
+    layout->addWidget(m_pluginStackedWidget);
+
+    // 加载插件信息
+    QVector<PluginInfo> plugins = m_pluginManager->pluginInfos();
+    for (const PluginInfo& plugin : plugins)
     {
-        PluginInterface *pluginInterface = qobject_cast<PluginInterface *>(plugin);
-        if (pluginInterface)
-        {
-            qDebug() << "Plugin loaded:" << pluginInterface->name();
-            pluginInterface->setParent(this); // 将插件的父对象设置为MainWindow，确保其生命周期与MainWindow一致
-        }
-    }
-    else
-    {
-        qDebug() << "Failed to load plugin:" << loader.errorString();
+        m_pluginListWidget->addItem(plugin.name);
+        m_pluginStackedWidget->addWidget(plugin.widget);
     }
 }
 

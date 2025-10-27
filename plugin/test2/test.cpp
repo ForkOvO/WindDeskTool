@@ -3,7 +3,7 @@
 
 Test::Test(QObject *parent)
 {
-    m_info.name = "Test Plugin";
+    m_info.name = "Test Plugin2";
     m_info.widget = new TestWidget();
 }
 

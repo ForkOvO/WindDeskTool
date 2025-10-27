@@ -17,6 +17,8 @@ public:
     static PublicInfoManager* instance(); // 获取单例对象
 
     inline QString name() const { return m_name; } // 获取软件名称
+    inline QString exePath() const { return m_exePath; } // 获取软件执行路径
+    inline QString pluginDirPath() const { return m_exeDirPath + "/plugins"; } // 获取插件路径
 
 private:
     explicit PublicInfoManager();
@@ -26,6 +28,7 @@ private:
     QString m_name = "风桌工具"; // 软件名称
 
     QString m_exePath; // 软件执行路径
+    QString m_exeDirPath; // 软件执行目录路径
 };
 
 #endif // PUBLICINFOMANAGER_H

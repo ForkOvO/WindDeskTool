@@ -5,11 +5,18 @@
 
 #include <QWidget>
 
-class PluginInterface : public QWidget
+class PluginInfo
+{
+public:
+    QString name = "";   // 插件名称
+    QWidget* widget = nullptr; // 插件主界面
+};
+
+class PluginInterface : public QObject
 {
 public:
     virtual ~PluginInterface() {}
-    virtual QString name() const = 0;   // 插件名称
+    virtual PluginInfo info() const = 0;   // 插件信息
 };
 
 #define PluginInterface_iid "com.example.PluginInterface"

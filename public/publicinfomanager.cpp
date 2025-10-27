@@ -24,4 +24,5 @@ PublicInfoManager* PublicInfoManager::instance()
 PublicInfoManager::PublicInfoManager()
 {
     m_exePath = QCoreApplication::applicationFilePath();
+    m_exeDirPath = QCoreApplication::applicationDirPath();
 }
